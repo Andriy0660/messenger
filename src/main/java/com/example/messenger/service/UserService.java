@@ -17,4 +17,10 @@ public class UserService {
     public List<User> getAllUsers(){
         return repository.findAll();
     }
+    public boolean exists(String name){
+        return repository.existsByName(name);
+    }
+    public User findByName(String name){
+        return repository.findByName(name).orElseThrow(()-> new RuntimeException());
+    }
 }

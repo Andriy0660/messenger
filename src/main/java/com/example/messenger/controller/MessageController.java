@@ -32,5 +32,4 @@ public class MessageController {
                 request.getIdOfSecondUser());
         return ResponseEntity.ok(messageList);
     }
-
 }

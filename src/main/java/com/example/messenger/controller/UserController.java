@@ -17,13 +17,20 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     @PostMapping
-    public ResponseEntity<RegisterResponse> registerUser(@RequestBody RegisterRequest request){
-        User user = userService.save(User.builder()
-                .name(request.getName())
-                .build());
+    public ResponseEntity<RegisterResponse> signIn(@RequestBody RegisterRequest request){
+        String name = request.getName();
+        User user;
+        if(userService.exists(name)){
+            user = userService.findByName(name);
+        }
+        else {
+            user = userService.save(User.builder()
+                    .name(request.getName())
+                    .build());
+        }
         return ResponseEntity.ok(new RegisterResponse(user.getId()));
     }
-    @GetMapping
+    @PostMapping("/getAll")
     public ResponseEntity<List<User>> getAllUsers(@RequestBody GetAllUsersRequest request){
         Long idOfCurrentUser = request.getIdOfCurrentUser();
         return ResponseEntity.ok(userService.getAllUsers()
