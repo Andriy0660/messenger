@@ -24,4 +24,7 @@ public class UserService {
     public User findByName(String name){
         return repository.findByName(name).orElseThrow(() -> new BadRequestException("No such user with name " + name));
     }
+    public User findById(Long id){
+        return repository.findById(id).orElseThrow(()-> new BadRequestException("No such user with id " +id));
+    }
 }

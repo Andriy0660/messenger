@@ -2,6 +2,7 @@ package com.example.messenger.controller;
 
 import com.example.messenger.dto.request.GetMessagesRequest;
 import com.example.messenger.dto.request.SendMessageRequest;
+import com.example.messenger.dto.response.MessageResponse;
 import com.example.messenger.entity.Message;
 import com.example.messenger.service.MessageService;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +28,8 @@ public class MessageController {
         return ResponseEntity.noContent().build();
     }
     @GetMapping
-    public ResponseEntity<List<Message>> getAllMessagesForUsers(@RequestBody GetMessagesRequest request){
-        List<Message> messageList = messageService.getAllMessagesForUsers(request.getIdOfFirstUser(),
+    public ResponseEntity<List<MessageResponse>> getAllMessagesForUsers(@RequestBody GetMessagesRequest request){
+        List<MessageResponse> messageList = messageService.getAllMessagesForUsers(request.getIdOfFirstUser(),
                 request.getIdOfSecondUser());
         return ResponseEntity.ok(messageList);
     }
