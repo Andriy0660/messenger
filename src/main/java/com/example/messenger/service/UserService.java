@@ -1,6 +1,7 @@
 package com.example.messenger.service;
 
 import com.example.messenger.entity.User;
+import com.example.messenger.exception.BadRequestException;
 import com.example.messenger.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,6 @@ public class UserService {
         return repository.existsByName(name);
     }
     public User findByName(String name){
-        return repository.findByName(name).orElseThrow(()-> new RuntimeException());
+        return repository.findByName(name).orElseThrow(() -> new BadRequestException("No such user with name " + name));
     }
 }
