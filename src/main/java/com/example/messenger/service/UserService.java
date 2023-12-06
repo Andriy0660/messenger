@@ -23,4 +23,7 @@ public class UserService {
     public User findByName(String name){
         return repository.findByName(name).orElseThrow(()-> new RuntimeException());
     }
+    public User findById(Long id){
+        return repository.findById(id).orElseThrow(()-> new RuntimeException());
+    }
 }
