@@ -19,6 +19,7 @@ public class MessageController {
     private final MessageService messageService;
     @PostMapping
     public ResponseEntity<Void> saveMessage(@RequestBody SendMessageRequest request){
+        System.out.println(request);
         messageService.save(Message.builder()
                 .content(request.getContent())
                 .senderId(request.getSenderId())
@@ -27,10 +28,11 @@ public class MessageController {
                 .build());
         return ResponseEntity.noContent().build();
     }
-    @GetMapping
+    @PostMapping("/getAll")
     public ResponseEntity<List<MessageResponse>> getAllMessagesForUsers(@RequestBody GetMessagesRequest request){
         List<MessageResponse> messageList = messageService.getAllMessagesForUsers(request.getIdOfFirstUser(),
                 request.getIdOfSecondUser());
         return ResponseEntity.ok(messageList);
     }
 }
+

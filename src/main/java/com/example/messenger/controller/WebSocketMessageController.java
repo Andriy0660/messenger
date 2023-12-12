@@ -17,17 +17,13 @@ public class WebSocketMessageController {
     private final UserService userService;
     @MessageMapping("/chat/{chatId}")
     @SendTo("/topic/chat/{chatId}")
-    public MessageResponse publishMessage(@DestinationVariable String chatId, @Payload SendMessageRequest messageRequest) {
+    public MessageResponse publishMessage(@DestinationVariable String chatId,
+                                          @Payload SendMessageRequest messageRequest) {
         User user = userService.findById(messageRequest.getSenderId());
         return MessageResponse.builder()
                 .username(user.getName())
                 .content(messageRequest.getContent())
                 .build();
-//        return Message.builder()
-//                .content(messageRequest.getContent())
-//                .senderId(messageRequest.getSenderId())
-//                .receiverId(messageRequest.getReceiverId())
-//                .time(LocalDateTime.now())
 //
 
     }
